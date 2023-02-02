@@ -35,7 +35,7 @@
             <tr>
                 <td>{{ $key + 1 }}</td>
                 @php
-                    $getAddedUser = App\Models\User::where('added_by', $item->added_by)->first();
+                    $getAddedUser = App\Models\User::where('id', $item->added_by)->first();
                 @endphp
                 <td>{{ $getAddedUser->name }}</td>
                

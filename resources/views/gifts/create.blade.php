@@ -32,7 +32,7 @@
                             @csrf
                             <div class="mb-2">
                                 <label for="">Guest Name</label>
-                                <input type="text" placeholder="Guest Name" name="guest_name" class="form-control @error('guest_name') is-invalid @enderror">
+                                <input type="text" autofocus placeholder="Guest Name" name="guest_name" class="form-control @error('guest_name') is-invalid @enderror">
                                 @error('guest_name') <span class="text-danger">{{ $message }}</span>@enderror
                             </div>
                             <div class="mb-2">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\GuestGift;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use PDF;
 
 class ImportExportController extends Controller
@@ -29,7 +30,7 @@ class ImportExportController extends Controller
     function userExportPDF()
     {
         // retreive all records from db
-        $users = User::orderBy('created_at','ASC')->get();
+        $users = User::where('id','!=',Auth::user()->id)->orderBy('created_at','ASC')->get();
         $totalusers = User::all()->count();
         $data = [
             'title' => 'All Users',
