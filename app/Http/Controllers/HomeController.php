@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\GuestGift;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $total_collection = GuestGift::select('gift_amount')->sum('gift_amount');
+        $total_users = GuestGift::all()->count();
+        $maximum_collections = GuestGift::orderBy('gift_amount','DESC')->limit(10)->get();
+        return view('home', compact('total_collection','total_users','maximum_collections'));
     }
 }

@@ -29,7 +29,8 @@ class UserController extends Controller
             'name' => 'required|string',
             'email' => 'required|unique:users,email',
             'user_type' => 'required',
-            'password' => 'required|min:8'
+            'password' => 'required|min:8',
+            'photo' => 'mimes:jpg,png,jpeg|max:2048'
         ]);
         try {
             $photoname = NULL;
@@ -50,6 +51,42 @@ class UserController extends Controller
             return back()->with('success', 'User has been added successfully.');
         } catch (Exception $e) {
             return back()->with('error', 'User Not added');
+        }
+    }
+
+    public function edit($id){
+        $user =  User::findOrFail(decrypt($id));
+        return view('users.edit', compact('user'));
+    }
+
+    public function update(Request $request, $id){
+        $request->validate([
+            'photo' => 'mimes:jpg,jpeg,png'
+        ]);
+       try {
+            $user = User::findOrFail(decrypt($id));
+            if ($request->hasFile('photo')) {
+                $extension = $request->photo->getClientOriginalExtension();
+                $fileName = uniqid() . '.' . $extension;
+                if (file_exists(public_path('/uploads/users/' . $user->image)) && $user->image != null) {
+                    unlink(public_path('/uploads/users/' . $user->image));
+                    $request->photo->move(public_path('/uploads/users/'), $fileName);
+                } else {
+                    $request->photo->move(public_path('/uploads/users/'), $fileName);
+                }
+               
+                $user->image = $fileName;
+                $user->save();
+            }
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->phone_number = $request->phone;
+            $user->user_type = $request->user_type;
+            $user->save();
+
+         return back()->with('success', 'User has been Updated!');
+        } catch (Exception $e) {
+           return back()->with('error', 'Something happen Wrong!');
         }
     }
 
