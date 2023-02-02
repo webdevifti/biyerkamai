@@ -1,5 +1,5 @@
 @extends('master')
-@section('title', 'Your all collections')
+@section('title', 'Your all Users')
 @section('style')
 <link rel="stylesheet" href="{{ asset('vendors/dataTable/jquery.dataTables.min.css') }}">
 <link rel="stylesheet" href="{{ asset('vendors/dataTable/buttons.dataTables.min.css') }}">
@@ -10,10 +10,10 @@
            <div id="layoutSidenav_content">
             <main>
                 <div class="container-fluid px-4">
-                    <h1 class="mt-4">Collections</h1>
+                    <h1 class="mt-4">Users</h1>
                     <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="{{ route('home') }}">Dashboard</a></li>
-                        <li class="breadcrumb-item active">collection</li>
+                        <li class="breadcrumb-item active">Users</li>
                     </ol>
                     @if(Session()->has('success'))
                     <div class="alert alert-success">
@@ -29,7 +29,7 @@
                         <div class="card-header">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div><i class="fas fa-table me-1"></i>
-                                    Your Total collection: <strong>{{ $totalCollection }}</strong></div>
+                                    Your Total users: <strong>{{ $totalusers }}</strong></div>
                                     @if($data->count() > 0)
                                     <div>
                                         <div class="dropdown">
@@ -51,9 +51,10 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>Who Added</th>
-                                        <th>Guest Name</th>
-                                        <th>Gift Type</th>
-                                        <th>Amount</th>
+                                        <th>Photo</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>User Type</th>
                                         <th>Time</th>
                                         <th>Action</th>
                                     </tr>
@@ -63,8 +64,8 @@
                                     @foreach ($data as $key=>$item)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{ ($item->giftToUser ? $item->giftToUser->name : 'N/A') }}</td>
-                                        <td>{{ $item->guest_name }}</td>
+                                        <td>{{ }}</td>
+                                        <td>{{ $item->name }}</td>
                                         <td>
                                             @if($item->gift_type == 'cash')
                                             <span class="badge bg-success">{{ $item->gift_type }}</span>

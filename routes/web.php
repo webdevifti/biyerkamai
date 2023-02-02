@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\GuestGiftController;
 use App\Http\Controllers\ImportExportController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +25,8 @@ Auth::routes(['register' => false]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::group(['middleware' => 'AdminRoutes'], function(){
+
+    Route::get('/users/all', [UserController::class, 'index'])->name('user.index');
     Route::get('/collection',[GuestGiftController::class, 'index'])->name('collection.index');
     Route::get('/collection/create',[GuestGiftController::class, 'create'])->name('collection.create');
     Route::post('/collection/store',[GuestGiftController::class, 'store'])->name('collection.store');
