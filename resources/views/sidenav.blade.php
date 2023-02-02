@@ -20,7 +20,7 @@
                     </nav>
                 </div>
                 
-                <a class="nav-link" href="{{ route('user.index') }}">
+                <a class="nav-link {{ Route::currentRouteName('user.index') ? 'active':'' }}" href="{{ route('user.index') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-users"></i></div>
                     Users
                 </a>

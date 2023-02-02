@@ -20,10 +20,12 @@ return new class extends Migration
             $table->string('phone_number')->nullable();
             $table->string('image')->nullable();
             $table->integer('status')->default(1);
+            $table->string('user_type')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

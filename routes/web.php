@@ -27,6 +27,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['middleware' => 'AdminRoutes'], function(){
 
     Route::get('/users/all', [UserController::class, 'index'])->name('user.index');
+    Route::get('/users/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/users/store', [UserController::class, 'store'])->name('user.store');
+    Route::get('/users/edit/{id}', [UserController::class, 'edit'])->name('user.edit');
+    Route::get('/users/delete/{id}', [UserController::class, 'delete'])->name('user.delete');
+
+
+
     Route::get('/collection',[GuestGiftController::class, 'index'])->name('collection.index');
     Route::get('/collection/create',[GuestGiftController::class, 'create'])->name('collection.create');
     Route::post('/collection/store',[GuestGiftController::class, 'store'])->name('collection.store');
