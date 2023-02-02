@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GuestGift;
+use App\Models\User;
 use PDF;
 
 class ImportExportController extends Controller
@@ -24,5 +25,21 @@ class ImportExportController extends Controller
         $pdf = PDF::loadView('exports.collectionPDF', $data);
      
         return $pdf->download('collection.pdf');
+    }
+    function userExportPDF()
+    {
+        // retreive all records from db
+        $users = User::orderBy('created_at','ASC')->get();
+        $totalusers = User::all()->count();
+        $data = [
+            'title' => 'All Users',
+            'date' => date('m/d/Y, H:i a'),
+            'users' => $users,
+            'totalusers' => $totalusers
+        ]; 
+            
+        $pdf = PDF::loadView('exports.userPDF', $data);
+     
+        return $pdf->download('users.pdf');
     }
 }

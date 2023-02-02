@@ -41,7 +41,7 @@
                                                 Export
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="{{ route('data.export.pdf') }}">PDF</a>
+                                                <li><a class="dropdown-item" href="{{ route('user.data.export.pdf') }}">PDF</a>
                                                 </li>
                                             </ul>
                                         </div>

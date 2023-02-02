@@ -41,4 +41,5 @@ Route::group(['middleware' => 'AdminRoutes'], function(){
 
     // Exporting
     Route::get('/data/export/pdf', [ImportExportController::class, 'exportPDF'])->name('data.export.pdf');
+    Route::get('/user/data/export/pdf', [ImportExportController::class, 'userExportPDF'])->name('user.data.export.pdf');
 });

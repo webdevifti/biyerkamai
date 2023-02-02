@@ -52,4 +52,14 @@ class UserController extends Controller
             return back()->with('error', 'User Not added');
         }
     }
+
+    public function delete($id){
+        try{
+            $user = User::findOrFail(decrypt($id));
+            $user->delete();
+            return back()->with('success','user has been deleted successfully.');
+        }catch(Exception $e){
+            return back()->with('error','Someting happened wrong!');
+        }
+    }
 }
